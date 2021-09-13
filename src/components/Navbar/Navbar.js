@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import cx from 'classnames'
 
 import HFIcon from '../../ui/HFIcon'
 import UIActions from '../../redux/actions/ui'
@@ -9,6 +10,7 @@ import SwitchMode from '../SwitchMode'
 
 import LayoutSettings from './Navbar.LayoutSettings'
 import AppSettings from './Navbar.AppSettings'
+import Logout from './Navbar.Logout'
 import Routes from '../../constants/routes'
 import { isElectronApp } from '../../redux/config'
 
@@ -31,7 +33,7 @@ const Navbar = () => {
         ))}
       </ul>
       <div className='hfui-tradingpage__menu'>
-        <div className='hfui-exchangeinfobar__buttons'>
+        <div className={cx('hfui-exchangeinfobar__buttons', { 'is-electron': isElectronApp })}>
           <LayoutSettings />
           <NavbarButton
             alt='Notifications'
@@ -39,14 +41,15 @@ const Navbar = () => {
             onClick={() => dispatch(UIActions.switchNotifcationPanel())}
           />
           {isElectronApp && <AppSettings />}
+          {!isElectronApp && <Logout />}
         </div>
         {isElectronApp && (
-        <div className='hfui-tradingpaper__control'>
-          <div className='hfui-tradingpaper__control-toggle'>
-            <p>Paper Trading</p>
-            <SwitchMode />
+          <div className='hfui-tradingpaper__control'>
+            <div className='hfui-tradingpaper__control-toggle'>
+              <p>Paper Trading</p>
+              <SwitchMode />
+            </div>
           </div>
-        </div>
         )}
       </div>
     </div>
