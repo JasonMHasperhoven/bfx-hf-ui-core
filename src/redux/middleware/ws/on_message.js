@@ -146,6 +146,8 @@ export default (alias, store) => (e = {}) => {
 
       case 'notify': {
         const [, status, message] = payload
+        console.log('TCL: status', status)
+        console.log('TCL: message', message)
         store.dispatch(WSActions.recvNotification({
           status,
           text: message,

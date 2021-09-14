@@ -33,7 +33,11 @@ const Navbar = () => {
         ))}
       </ul>
       <div className='hfui-tradingpage__menu'>
-        <div className={cx('hfui-exchangeinfobar__buttons', { 'is-electron': isElectronApp })}>
+        <div
+          className={cx('hfui-exchangeinfobar__buttons', {
+            'is-web': !isElectronApp,
+          })}
+        >
           <LayoutSettings />
           <NavbarButton
             alt='Notifications'
